@@ -1,13 +1,23 @@
 import DogList from '../Components/DogList/DogList'
 import Form from '../Components/Form/Form'
 import { Inter } from 'next/font/google'
+import { useState, useEffect } from 'react'
+import {inputText} from '../Components/Form/Form'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  // You will need to put a state here to save all the dogs data into
-  // And you will fetch the data with useEffect
+   const [items, setItems] = useState([]);
+   const [number, setNumber] = useState(0);
+
+
+
+   useEffect(() => {
+    fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
+    .then(res => res.json())
+    .then((data) => setItems(data))
+   }, [number])
 
    return (
     <div className="card">
@@ -15,9 +25,9 @@ export default function Home() {
           How can we do that by utilizing useState?
           
       */}
-      {/* <Form /> Uncomment <Form /> if you are going after the bonus */}
+      <Form setNumberOfDogs={setNumber}/>
       {/* This page should receive the images array */}
-      <DogList />
+      <DogList dogsList={items.message}/>
     </div>
   );
 }

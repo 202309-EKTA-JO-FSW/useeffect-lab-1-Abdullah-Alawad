@@ -1,6 +1,7 @@
 
 
-export default function ShoppingList({ dogsList = [] }) {
+export default function DogList({ dogsList = [] }) {
+  
   return (
     <div className="shopping-cart">
       <h3 style={{ textAlign: "center" }}>
@@ -10,7 +11,7 @@ export default function ShoppingList({ dogsList = [] }) {
         </span>
       </h3>
       {dogsList.map((dog) => (
-        <img src={dog} alt="" />
+        <img key={dog} src={dog} alt="our dogs" />
       ))}
     </div>
   );
